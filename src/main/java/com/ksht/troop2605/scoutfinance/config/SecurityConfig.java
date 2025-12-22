@@ -28,6 +28,7 @@ public class SecurityConfig {
             )
         .authorizeHttpRequests(auth -> auth
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // allow preflight
+            .requestMatchers(HttpMethod.POST, "/**").permitAll() 
             .anyRequest().authenticated()
         )
         .formLogin(form -> form.disable()) // disable form login
