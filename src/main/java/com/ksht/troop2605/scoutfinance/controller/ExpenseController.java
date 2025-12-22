@@ -1,4 +1,4 @@
-package com.ksht.troop2605.scout_finance.controller;
+package com.ksht.troop2605.scoutfinance.controller;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,19 +15,30 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ksht.troop2605.scout_finance.entity.ExpenseClaim;
-import com.ksht.troop2605.scout_finance.repository.ExpenseClaimRepository;
+import com.ksht.troop2605.scoutfinance.entity.ExpenseClaim;
+import com.ksht.troop2605.scoutfinance.repository.ExpenseClaimRepository;
 
 import jakarta.validation.Valid;
 import lombok.Data;
 
 @RestController
 @RequestMapping("/api/expenses")
-@CrossOrigin
+@CrossOrigin(
+    origins = "https://scout-finance-ui.vercel.app",
+    allowedHeaders = "*",
+    methods = {
+        RequestMethod.GET,
+        RequestMethod.POST,
+        RequestMethod.PUT,
+        RequestMethod.DELETE,
+        RequestMethod.OPTIONS
+    }
+)
 @Data
 public class ExpenseController {
 
@@ -78,5 +89,4 @@ public ResponseEntity<?> upload(
 
     return ResponseEntity.ok().build();
 }
-
 }

@@ -1,4 +1,4 @@
-package com.ksht.troop2605.scout_finance.entity;
+package com.ksht.troop2605.scoutfinance.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

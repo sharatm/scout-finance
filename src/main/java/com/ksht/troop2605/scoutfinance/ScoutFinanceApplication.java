@@ -1,4 +1,4 @@
-package com.ksht.troop2605.scout_finance;
+package com.ksht.troop2605.scoutfinance;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
