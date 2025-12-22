@@ -2,9 +2,9 @@ spring:
   application:
     name: scout-finance
   datasource:
-    url: jdbc:postgresql://localhost:5432/scout_finance
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://scout_finance_user:4TSroETL6Nj9at7z7HxIAdtNIoW3u3cV@dpg-d54msu0gjchc7380uok0-a/scout_finance
+    username: scout_finance_user
+    password: 4TSroETL6Nj9at7z7HxIAdtNIoW3u3cV
   jpa:
     hibernate:
       ddl-auto: update
