@@ -1,14 +1,18 @@
 spring:
   application:
     name: scout-finance
+
   datasource:
-    url: jdbc:postgresql://scout_finance_user:4TSroETL6Nj9at7z7HxIAdtNIoW3u3cV@dpg-d54msu0gjchc7380uok0-a/scout_finance
-    username: scout_finance_user
-    password: 4TSroETL6Nj9at7z7HxIAdtNIoW3u3cV
+    # Use environment variables if available (Render)
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/scout_finance}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-    
+
   server:
     port: ${PORT:8080}
