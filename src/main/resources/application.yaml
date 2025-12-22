@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: scout-finance
+  datasource:
+    url: jdbc:postgresql://localhost:5432/scout_finance
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
