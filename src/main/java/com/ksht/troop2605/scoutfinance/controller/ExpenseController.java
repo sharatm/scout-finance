@@ -8,7 +8,10 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +46,9 @@ import lombok.Data;
 public class ExpenseController {
 
     private final ExpenseClaimRepository repo;
+
+    @Autowired
+    private JavaMailSender mailSender;
 
     public ExpenseController(ExpenseClaimRepository repo) {
         this.repo = repo;
@@ -89,4 +95,28 @@ public ResponseEntity<?> upload(
 
     return ResponseEntity.ok().build();
 }
+@PostMapping("/api/expenses")
+public ExpenseClaim submitExpense(@RequestBody ExpenseClaim claim) {
+    claim.setStatus(ExpenseClaim.Status.SUBMITTED);
+    claim.setSubmittedAt(LocalDateTime.now());
+    repo.save(claim);
+
+    // send email
+    SimpleMailMessage message = new SimpleMailMessage();
+    message.setTo(claim.getEmail() != null ? claim.getEmail() : "default@domain.com");
+    message.setSubject("Expense Submitted Successfully");
+    message.setText("Hello " + claim.getFullName() + ",\n\n" +
+                    "Your expense for event " + claim.getEventName() +
+                    " has been submitted successfully.\n\n" +
+                    "Amount: " + claim.getAmount() + "\n" +
+                    "Description: " + claim.getDescription() + "\n" +
+                    "Store Names: " + claim.getStoreNames() + "\n" +
+                    "Shopping Date: " + claim.getShoppingDate() + "\n\n" +
+                    "Thank you.");
+
+    mailSender.send(message);
+
+    return claim;
+}
+
 }
