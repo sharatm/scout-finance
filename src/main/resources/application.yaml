@@ -29,3 +29,8 @@ spring:
           auth: true
           starttls:
             enable: true
+  logging:
+  level:
+    org.springframework.mail: DEBUG
+    jakarta.mail: DEBUG
+
