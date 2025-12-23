@@ -23,13 +23,18 @@ public class ExpenseClaim {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "full_name")
     private String fullName;
+
     private String email;
 
+    @Column(name = "event_name")
     private String eventName;
+
+    @Column(name = "shopping_date")
     private LocalDate shoppingDate;
 
-    @Column(length = 500)
+    @Column(name = "store_names", length = 500)
     private String storeNames;
 
     @Column(length = 1000)
@@ -37,15 +42,20 @@ public class ExpenseClaim {
 
     private BigDecimal amount;
 
+    @Column(name = "zelle_name")
     private String zelleName;
+
+    @Column(name = "zelle_contact")
     private String zelleContact;
 
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @Column(name = "submitted_at")
     private LocalDateTime submittedAt;
 
     public enum Status {
         SUBMITTED, APPROVED, REJECTED, PAID
     }
 }
+
